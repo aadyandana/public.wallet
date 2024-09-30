@@ -9,4 +9,9 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   resources :wallet, only: [ :create ]
+
+  resources :transaction do
+    post "top_up", on: :collection
+    post "transfer", on: :collection
+  end
 end
