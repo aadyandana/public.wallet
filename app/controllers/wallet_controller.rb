@@ -1,4 +1,6 @@
 class WalletController < ApplicationController
+  skip_before_action :authenticate
+
   def create
     ActiveRecord::Base.transaction do
       wallet = Wallet.new(wallet_params)
