@@ -16,25 +16,13 @@ class Transaction < ApplicationRecord
 
   def update_wallet
     if self.sender_wallet_id.present?
-      self.sender_wallet.balance = total_amount(self.sender_wallet_id) - self.amount
+      self.sender_wallet.balance = self.sender_wallet.calculate_balance - self.amount
       self.sender_wallet.save!
     end
 
     if self.receiver_wallet_id.present?
-      self.receiver_wallet.balance = total_amount(self.receiver_wallet_id) + self.amount
+      self.receiver_wallet.balance = self.receiver_wallet.calculate_balance + self.amount
       self.receiver_wallet.save!
     end
-  end
-
-  def total_credit_amount(wallet_id)
-    Transaction.where(receiver_wallet_id: wallet_id).sum(:amount)
-  end
-
-  def total_debit_amount(wallet_id)
-    Transaction.where(sender_wallet_id: wallet_id).sum(:amount)
-  end
-
-  def total_amount(wallet_id)
-    total_credit_amount(wallet_id) - total_debit_amount(wallet_id)
   end
 end
