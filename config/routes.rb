@@ -19,4 +19,10 @@ Rails.application.routes.draw do
     post "top_up", on: :collection
     post "transfer", on: :collection
   end
+
+  resources :stock_price, only: [] do
+    get :price, on: :collection
+    get :prices, on: :collection
+    get :price_all, on: :collection
+  end
 end

@@ -30,6 +30,8 @@ gem "bootsnap", require: false
 # gem "rack-cors"
 
 gem "pg"
+gem "httparty"
+gem "aadyandana-latest_stock_price", '= 1.1.0'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
