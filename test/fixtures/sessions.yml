@@ -2,10 +2,12 @@
 
 one:
   wallet: one
+  type: 
   token: MyString
-  expired_at: 2024-10-01 20:28:44
+  expired_at: 2024-10-02 21:28:15
 
 two:
   wallet: two
+  type: 
   token: MyString
-  expired_at: 2024-10-01 20:28:44
+  expired_at: 2024-10-02 21:28:15
