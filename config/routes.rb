@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     post :refresh_token, on: :collection
   end
 
-  resources :wallet, only: [ :create ]
+  resources :wallet, only: [ :index, :create ]
 
   resources :transaction, only: [] do
     post :top_up, on: :collection
