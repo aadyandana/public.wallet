@@ -2,6 +2,7 @@ class TransactionController < ApplicationController
   def top_up
     ActiveRecord::Base.transaction do
       transaction = Transaction.new(top_up_params)
+      transaction.receiver_wallet = @wallet
 
       transaction.save!
 
@@ -14,6 +15,7 @@ class TransactionController < ApplicationController
   def transfer
     ActiveRecord::Base.transaction do
       transaction = Transaction.new(transfer_params)
+      transaction.sender_wallet = @wallet
 
       transaction.save!
 
