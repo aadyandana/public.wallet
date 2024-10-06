@@ -8,16 +8,16 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  resources :session do
-    post "get_token", on: :collection
-    post "refresh_token", on: :collection
+  resources :session, only: [] do
+    post :get_token, on: :collection
+    post :refresh_token, on: :collection
   end
 
   resources :wallet, only: [ :create ]
 
-  resources :transaction do
-    post "top_up", on: :collection
-    post "transfer", on: :collection
+  resources :transaction, only: [] do
+    post :top_up, on: :collection
+    post :transfer, on: :collection
   end
 
   resources :stock_price, only: [] do
