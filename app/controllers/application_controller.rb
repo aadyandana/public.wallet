@@ -26,6 +26,7 @@ class ApplicationController < ActionController::API
   end
 
   private
+  
   def get_session(token)
     session = Session.where(token: token)
     session = is_refresh_token ? session.refresh : session.access

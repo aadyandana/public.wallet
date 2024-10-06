@@ -28,6 +28,7 @@ module Authentications
     end
 
     private
+    
     def create_session(type, token)
       ActiveRecord::Base.transaction do
         session_params = { wallet: @wallet, session_type: type, token: token }

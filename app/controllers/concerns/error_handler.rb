@@ -10,6 +10,7 @@ module ErrorHandler
   end
 
   private
+  
   def handle_internal_error(e)
     error_response(e.message)
   end

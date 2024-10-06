@@ -12,6 +12,7 @@ class TransactionController < ApplicationController
   end
 
   private
+  
   def top_up_params
     transaction_params = params.require(:transaction).permit(:amount)
     transaction_params[:transaction_type] = params[:action]

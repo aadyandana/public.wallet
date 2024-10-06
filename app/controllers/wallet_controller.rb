@@ -14,6 +14,7 @@ class WalletController < ApplicationController
   end
 
   private
+  
   def index_params
     params.permit(:owner_type)
   end
