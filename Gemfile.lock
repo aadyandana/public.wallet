@@ -270,8 +270,8 @@ DEPENDENCIES
   bootsnap
   brakeman
   debug
-  httparty
-  pg
+  httparty (~> 0.22.0)
+  pg (~> 1.5.8)
   puma (>= 5.0)
   rails (~> 7.2.1)
   rubocop-rails-omakase
