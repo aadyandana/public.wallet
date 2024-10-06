@@ -64,4 +64,7 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions.
   config.action_controller.raise_on_missing_callback_actions = true
+
+  config.session_access_token_duration = 5.seconds
+  config.session_refresh_token_duration = 10.seconds
 end

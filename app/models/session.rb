@@ -15,7 +15,9 @@ class Session < ApplicationRecord
 
   def set_expired_at
     expired_at = Time.current
-    expired_at += self.session_type == SESSION_TYPE_REFRESH ? 2.weeks : 30.minutes
+    expired_at += self.session_type == SESSION_TYPE_REFRESH ?
+      Rails.application.config.session_refresh_token_duration :
+      Rails.application.config.session_access_token_duration
 
     self.expired_at = expired_at
   end

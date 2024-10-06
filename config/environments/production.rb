@@ -92,4 +92,7 @@ Rails.application.configure do
   # ]
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+
+  config.session_access_token_duration = 5.minutes
+  config.session_refresh_token_duration = 1.weeks
 end
