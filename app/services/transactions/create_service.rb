@@ -6,11 +6,11 @@ module Transactions
 
     def call
       ActiveRecord::Base.transaction do
-        session = Transaction.new(@params)
+        transaction = Transaction.new(@params)
 
-        session.save!
+        transaction.save!
 
-        session
+        transaction
       rescue ActiveRecord::ActiveRecordError => e
         raise e
       end
