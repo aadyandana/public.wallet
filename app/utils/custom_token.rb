@@ -1,11 +1,12 @@
 class CustomToken
   def initialize(plaindata)
+    @secret = Rails.application.credentials[:custom_token_secret]
+
     @plaindata = plaindata
   end
 
   def call
-    secret = "04990bbe1e9f8388207bbd63ca0967ca"
-    encryptor = ActiveSupport::MessageEncryptor.new(secret)
+    encryptor = ActiveSupport::MessageEncryptor.new(@secret)
 
     encryptor.encrypt_and_sign(@plaindata)
   end

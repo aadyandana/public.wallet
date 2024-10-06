@@ -3,7 +3,7 @@ module Externals
     module LatestStockPrice
       class DefaultService
         def initialize
-          @api_key = "7b2cbe4004msh0b94261c586673ap16b380jsnb6ab6ebafa6d"
+          @api_key = Rails.application.credentials.latest_stock_price_service[:api_key]
         end
       end
     end
