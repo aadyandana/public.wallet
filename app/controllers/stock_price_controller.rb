@@ -10,23 +10,17 @@ class StockPriceController < ApplicationController
     stock = PriceService.new(params).call
 
     standard_response(stock)
-  rescue => e
-    error_response(e.message)
   end
 
   def prices
     stocks = PricesService.new(params).call
 
     standard_response(stocks)
-  rescue => e
-    error_response(e.message)
   end
 
   def price_all
     stocks = PriceAllService.new.call
 
     standard_response(stocks)
-  rescue => e
-    error_response(e.message)
   end
 end

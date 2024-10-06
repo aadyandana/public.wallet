@@ -3,24 +3,12 @@ class TransactionController < ApplicationController
     transaction = Transactions::CreateService.new(top_up_params).call
 
     standard_response(transaction.receiver_wallet.balance)
-  rescue ActionController::ParameterMissing => e
-    error_response(e.message, 400)
-  rescue ActiveRecord::ActiveRecordError => e
-    error_response(e.message, 422)
-  rescue => e
-    error_response(e.message)
   end
 
   def transfer
     transaction = Transactions::CreateService.new(transfer_params).call
 
     standard_response(transaction.sender_wallet.balance)
-  rescue ActionController::ParameterMissing => e
-    error_response(e.message, 400)
-  rescue ActiveRecord::ActiveRecordError => e
-    error_response(e.message, 422)
-  rescue => e
-    error_response(e.message)
   end
 
   private
