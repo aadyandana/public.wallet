@@ -2,14 +2,15 @@ class WalletController < ApplicationController
   skip_before_action :authenticate
 
   def create
-    ActiveRecord::Base.transaction do
-      wallet = Wallet.new(wallet_params)
-      wallet.save!
+    wallet = Wallets::CreateService.new(wallet_params).call
 
-      standard_response(wallet, StatusCode::CREATED)
-    rescue => e
-      error_response(e.message, StatusCode::UNPROCESSABLE_ENTITY)
-    end
+    standard_response(wallet, StatusCode::CREATED)
+  rescue ActionController::ParameterMissing => e
+    error_response(e.message, 400)
+  rescue ActiveRecord::ActiveRecordError => e
+    error_response(e.message, 422)
+  rescue => e
+    error_response(e.message)
   end
 
   private
