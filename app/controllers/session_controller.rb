@@ -10,11 +10,11 @@ class SessionController < ApplicationController
 
     standard_response(data)
   rescue ActionController::ParameterMissing => e
-    error_response(e.message, :bad_request)
+    error_response(e.message, 400)
   rescue ActiveRecord::RecordNotFound => e
-    error_response(e.message, :not_found)
+    error_response(e.message, 404)
   rescue ActiveRecord::ActiveRecordError => e
-    error_response(e.message, :unprocessable_entity)
+    error_response(e.message, 422)
   rescue => e
     error_response(e.message)
   end
@@ -24,7 +24,7 @@ class SessionController < ApplicationController
 
     standard_response(data)
   rescue ActiveRecord::ActiveRecordError => e
-    error_response(e.message, :unprocessable_entity)
+    error_response(e.message, 422)
   rescue => e
     error_response(e.message)
   end

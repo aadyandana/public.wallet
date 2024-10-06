@@ -4,19 +4,20 @@ class ApplicationController < ActionController::API
   before_action :authenticate
 
   def authenticate
-    authorization = request.headers["Authorization"]&.split(" ")
+    return error_response("Unauthorized: No Authorization Found", StatusCode::UNAUTHORIZED) if not request.headers["Authorization"].present?
 
-    return error_response("Unauthorized: No Authorization Found", :unauthorized) if not authorization&.first == "Bearer"
-    return error_response("Unauthorized: Not Bearer Authorization", :unauthorized) if not authorization&.first == "Bearer"
+    authorizations = request.headers["Authorization"]&.split(" ")
 
-    token = authorization&.last
+    return error_response("Unauthorized: Not Bearer Authorization", StatusCode::UNAUTHORIZED) if not authorizations&.first == "Bearer"
+
+    token = authorizations&.last
 
     session = get_session(token)
 
-    return error_response("Unauthorized: No Session Found", :unauthorized) if not session.present?
+    return error_response("Unauthorized: No Session Found", StatusCode::UNAUTHORIZED) if not session.present?
 
     if session.expired_at < Time.current
-      return error_response("Unauthorized: #{session.session_type.capitalize} Token Expired", :unauthorized)
+      return error_response("Unauthorized: #{session.session_type.capitalize} Token Expired", StatusCode::UNAUTHORIZED)
     end
 
     @wallet = session.wallet

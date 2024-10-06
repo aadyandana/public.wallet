@@ -9,24 +9,24 @@ class StockPriceController < ApplicationController
   def price
     stock = PriceService.new(params).call
 
-      render json: { status: 200, data: stock }, status: :ok
+    standard_response(stock)
   rescue => e
-    render json: { status: 500, error: e.message }, status: :internal_server_error
+    error_response(e.message)
   end
 
   def prices
     stocks = PricesService.new(params).call
 
-      render json: { status: 200, data: stocks }, status: :ok
+    standard_response(stocks)
   rescue => e
-    render json: { status: 500, error: e.message }, status: :internal_server_error
+    error_response(e.message)
   end
 
   def price_all
     stocks = PriceAllService.new.call
 
-      render json: { status: 200, data: stocks }, status: :ok
+    standard_response(stocks)
   rescue => e
-    render json: { status: 500, error: e.message }, status: :internal_server_error
+    error_response(e.message)
   end
 end

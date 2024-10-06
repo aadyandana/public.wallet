@@ -6,9 +6,9 @@ class WalletController < ApplicationController
       wallet = Wallet.new(wallet_params)
       wallet.save!
 
-      render json: { status: 201, data: wallet }, status: :created
-    rescue ActiveRecord::RecordInvalid => e
-      render json: { status: 422, error: e.message }, status: :unprocessable_entity
+      standard_response(wallet, StatusCode::CREATED)
+    rescue => e
+      error_response(e.message, StatusCode::UNPROCESSABLE_ENTITY)
     end
   end
 

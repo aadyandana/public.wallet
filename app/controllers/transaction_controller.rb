@@ -5,9 +5,9 @@ class TransactionController < ApplicationController
 
       transaction.save!
 
-      render json: { status: 201, new_balance: transaction.receiver_wallet.balance }, status: :created
+      standard_response(transaction.receiver_wallet.balance)
     rescue ActiveRecord::RecordInvalid => e
-      render json: { status: 422, error: e.message }, status: :unprocessable_entity
+      error_response(e.message, StatusCode::UNPROCESSABLE_ENTITY)
     end
   end
 
@@ -17,9 +17,9 @@ class TransactionController < ApplicationController
 
       transaction.save!
 
-      render json: { status: 201, new_balance: transaction.sender_wallet.balance }, status: :created
+      standard_response(transaction.receiver_wallet.balance)
     rescue ActiveRecord::RecordInvalid => e
-      render json: { status: 422, error: e.message }, status: :unprocessable_entity
+      error_response(e.message, StatusCode::UNPROCESSABLE_ENTITY)
     end
   end
 
