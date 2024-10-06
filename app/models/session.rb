@@ -1,6 +1,4 @@
 class Session < ApplicationRecord
-  include SessionType
-
   validates :session_type, inclusion: { in: [ SessionType::ACCESS, SessionType::REFRESH ] }
 
   belongs_to :wallet
