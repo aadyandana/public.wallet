@@ -1,21 +1,20 @@
 class Session < ApplicationRecord
-  SESSION_TYPE_ACCESS = "ACCESS"
-  SESSION_TYPE_REFRESH = "REFRESH"
+  include SessionType
 
-  validates :session_type, inclusion: { in: %w[ACCESS REFRESH] }
+  validates :session_type, inclusion: { in: [ SessionType::ACCESS, SessionType::REFRESH ] }
 
   belongs_to :wallet
 
   scope :active, -> { where("expired_at >= ?", Time.current) }
-  scope :access, -> { where(session_type: SESSION_TYPE_ACCESS) }
-  scope :refresh, -> { where(session_type: SESSION_TYPE_REFRESH) }
+  scope :access, -> { where(session_type: SessionType::ACCESS) }
+  scope :refresh, -> { where(session_type: SessionType::REFRESH) }
 
   before_create :set_expired_at
   after_create :clear_expired
 
   def set_expired_at
     expired_at = Time.current
-    expired_at += self.session_type == SESSION_TYPE_REFRESH ?
+    expired_at += self.session_type == SessionType::REFRESH ?
       Rails.application.config.session_refresh_token_duration :
       Rails.application.config.session_access_token_duration
 

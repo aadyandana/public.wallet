@@ -10,7 +10,7 @@ module Authentications
 
         if not access_token.present?
           access_token = CustomToken.new(@wallet).call
-          create_session(Session::SESSION_TYPE_ACCESS, access_token)
+          create_session(SessionType::ACCESS, access_token)
         end
 
         { access_token: access_token }
