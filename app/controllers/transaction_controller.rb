@@ -26,14 +26,18 @@ class TransactionController < ApplicationController
   private
   def top_up_params
     transaction_params = params.require(:transaction).permit(:receiver_wallet_id, :amount)
-    transaction_params[:transaction_type] = "top_up"
 
-    transaction_params
+    add_transaction_type(transaction_params)
   end
 
   def transfer_params
     transaction_params = params.require(:transaction).permit(:sender_wallet_id, :receiver_wallet_id, :amount)
-    transaction_params[:transaction_type] = "transfer"
+
+    add_transaction_type(transaction_params)
+  end
+
+  def add_transaction_type(transaction_params)
+    transaction_params[:transaction_type] = params[:action]
 
     transaction_params
   end
