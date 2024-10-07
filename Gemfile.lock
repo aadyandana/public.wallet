@@ -1,8 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    aadyandana-latest_stock_price (1.1.0)
-      httparty
+    aadyandana-latest_stock_price (2.0.1)
+      httparty (~> 0.22.0)
     actioncable (7.2.1)
       actionpack (= 7.2.1)
       activesupport (= 7.2.1)
@@ -266,7 +266,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
-  aadyandana-latest_stock_price (= 1.1.0)
+  aadyandana-latest_stock_price (= 2.0.1)
   bootsnap
   brakeman
   debug
